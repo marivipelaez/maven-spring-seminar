@@ -1,0 +1,7 @@
+#summary Introducción al seminario de maven y spring
+
+= Introducción =
+
+Este seminario pretende ser una breve introducción práctica al uso de Sping y Maven. Para ello se desarrollará un pequeño proyecto (gestión de una biblioteca) donde se apliquen estas dos tecnologías, teniendo en cuenta de que el tipo de proyecto es multientorno (desarrollo, integración y producción) y multimódulo (módulo de acceso a datos, módulo de servicios, modulo web de acceso a los servicios y cliente standalone de acceso a los servicios).
+
+El desarrollo de este proyecto seguirán las siguientes [http://reposbcn/maven/site/es.tid.cd.archetypes/standalone-archetype/developerGuide.html Normas de desarrollo]
