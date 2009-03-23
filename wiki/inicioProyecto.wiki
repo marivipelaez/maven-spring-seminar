@@ -15,7 +15,7 @@ ngsn@ironman:~/workspace/ms$ mvn eclipse:eclipse
 
 == Enable maven ==
 
-[http://maven-spring-seminar.googlecode.com/files/enableMaven.png]
+
 
 
 == Edición pom.xml ==
