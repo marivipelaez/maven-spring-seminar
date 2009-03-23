@@ -78,7 +78,6 @@ pom.xml inicial
 La librería de trazas que se utilizará será commons-logging (scope compile), que nos aislará de del sistema de trazas que se utilice por debajo (java-logging (scope runtime), o log4j (scope runtime))
 
 {{{
-<dependencies>
         <!-- Dependencias externas -->
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -129,4 +128,3 @@ La librería de trazas que se utilizará será commons-logging (scope compile), 
 			</exclusions>
 		</dependency>
 }}}
-
