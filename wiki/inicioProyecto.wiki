@@ -1,0 +1,18 @@
+#summary Inicio del proyecto a partir del arquetipo
+
+= Introduction =
+
+Situarse en el directorio workspace de eclipse. A partir de ahora ($WORKSPACE)
+{{{
+ngsn@ironman:~/workspace/mvn -DgroupId=es.tid.ad.seminar -DartifactId=ms -Dversion=0.0.1-SNAPSHOT -DinteractiveMode=false
+}}}
+
+
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
