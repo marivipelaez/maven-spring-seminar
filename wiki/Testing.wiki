@@ -1,13 +1,83 @@
 #summary One-sentence summary of this page.
 
-= Introduction =
+= Introducción =
 
-Add your content here.
+Si seguimos las normas de TDD (Test Driven Development) antes de empezar a codificar ninguna clase, se debe crear la clase de test. Y este será nuestro procedimiento habitual. Esta clase se creará en: 
+{{{
+es.tid.ad.seminar.ms.daos
+}}}
+
+Normalmente se implementará al menos una clase de test por clase implementada. Definiéndose un test correcto y uno con error, por lo menos, para cada método. Aunque deberían existir:
+ * Un test con parámetros de entrada correctos y resultado correcto.
+ * Un test con parámetros de entrada correctos y resultado incorrecto.
+ * Un test con parámetros de entrada incorrectos
+ * ...
+Es decir, uno para cada posible flujo de código.
+
+Las clases de test incluirán el contexto de Spring y necesitarán que se inyecten las dependencias de los Daos que se vayan a llamar:
+{{{
+@Autowired(required = true)
+protected BookDao bookDao;
+}}}
+
+*Cada propiedad inyectada por autowire*, deberá disponer de, al menos, el método setter correspondiente.
+
+Para probar los Daos se pueden seguir dos filosofías, por lo menos:
+# Utilizar dbUnit (que para esto está):
+{{{
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration (locations={"classpath*:**testContext.xml"})
+public class BookDaoTest {
+    @Autowired(required = true)
+    protected DataSource dataSource;
+    @Autowired(required = true) 
+    protected String dbUnitFile = "dbUnitTest.xml"; 
+
+}
+}}}
+
+Esta clase debe implementar el método :
+{{{
+ @Before
+ public void onSetUpInTransaction() throws Exception {
+        logger.info("Cargando fichero XML de carga para DBUnit " + dbUnitFile);
+        InputStream file = this.getClass().getClassLoader().getResourceAsStream(dbUnitFile);
+        if (file == null) {
+            fail(format("El fichero {0} no se ha localizado en el classpath", dbUnitFile));
+        }
+        IDataSet dataSet = new FlatXmlDataSet(file);
+        // Creamos la conexión con la base de datos donde cargar la info
+        logger.info("Conectando con la base de datos de testing"); 
+        IDatabaseConnection connection = new DatabaseConnection(db.getConnection());
+        DatabaseConfig config = connection.getConfig();
+        config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MysqlDataTypeFactory());
+        try {
+            logger.info("Cargando datos de prueba DBUnit en la base de datos"); 
+            // Se realiza la limpieza y volcado del XML en la DB.
+            DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
+        }
+        finally {
+            connection.close();
+        }
+    }
+}}}
 
 
-= Details =
+Y se crearán los tests de los métodos solicitados:
+{{{
+ @Test
+ @Transactional (readOnly = true) /* @Transactional (propagation = Propagation.REQUIRED)*/
+ public void getNuevoPojoById() {
+        NuevoPojoId pk = nnn;
+	NuevoPojo np = nuevoDao.findByPK(pk);
+        Assert.assertNotNull(np);
+ }
+}}}
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Editar /src/test/resources/es/tid/aoc/hw/dbaccess/config/testContext.xml y añadir la siguiente línea:
+{{{
+<bean id="nuevoDao" class="es.tid.aoc.hw.dbaccess.daos.impl.NuevoHibernateDao" autowire="byName" />
+}}}
+
+Antes de ejecutarlo, debemos rellenar los datos de test. Estos datos se encuentran en src/test/resources/dbUnitTestFile.xml. Para rellenarlos, editar este fichero y añadir los registros de NuevaTabla suficientes para hacer tests.
+Una vez hecho esto, se puede lanzar el test.
