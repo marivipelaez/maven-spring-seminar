@@ -61,6 +61,25 @@ Esta clase debe implementar el método :
         }
     }
 }}}
+
+  Ejemplo de fichero de configuración dbUnit:
+
+{{{
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <users userid="1" name="name1" />
+  <users userid="2" name="name2" />
+  <users userid="3" name="name3" />
+  <users userid="4" name="name4" />
+  
+  <books bookid="1" title="title1" author="Charles Darwin" thema="Evolution"/>
+  <books bookid="2" title="title2" author="Charles Darwin" thema="Evolution"/>
+  <books bookid="3" title="title3" author="Charles Darwin" thema="Evolution"/>
+  <books bookid="4" title="title4" author="Charles Darwin" thema="Evolution"/>
+  
+  <readers />
+ </dataset>
+}}}
   # Cargando iniciando una conexión JDBC e implementando los rollbacks adecuados por estar realizando tests. La db debe estar creada y rellena con los datos adecuados para realizar el test.
 {{{
 @RunWith(SpringJUnit4ClassRunner.class)
