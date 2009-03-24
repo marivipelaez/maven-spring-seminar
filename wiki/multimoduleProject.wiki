@@ -27,7 +27,7 @@ ngsn@ironman:~/workspace/ms$ mvn eclipse:eclipse
 
 == Editar los pom.xml de cada módulo ==
 
-* Borrar dependencies
+=== Borrar dependencias ===
 {{{
   <dependencies>
     <dependency>
@@ -38,6 +38,7 @@ ngsn@ironman:~/workspace/ms$ mvn eclipse:eclipse
     </dependency>
   </dependencies>
 }}}
+=== Eliminar las etiquetas *groupId* y *version* ===
 * Dejar las etiquetas groupId y version del proyecto padre y eliminarlas del proyecto hijo. Las versiones se crearán del proyecto no de cada uno de los módulos, por lo tanto no tiene sentido tener la etiqueta versión.
 {{{
 <groupId>es.tid.ad.seminar.ms</groupId>
@@ -53,8 +54,6 @@ Todos los módulos generados tendrán que ser importados en Eclipse. Se pone com
 [http://maven-spring-seminar.googlecode.com/files/dataModule.png]
 
 === Configurar Working Set ===
-
-
 
 [http://maven-spring-seminar.googlecode.com/files/configureWorkingSet.png]
 
