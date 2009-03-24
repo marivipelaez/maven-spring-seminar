@@ -1,4 +1,4 @@
 * [Introduccion Introducción]
-  * [http://code.google.com/p/maven-spring-seminar/wiki/entornoDesarrollo Instalación y Configuración del entorno de desarrollo]
-* [http://code.google.com/p/maven-spring-seminar/wiki/inicioProyecto Primeros pasos en el proyecto]
-* [http://code.google.com/p/maven-spring-seminar/wiki/multimoduleProject Configuración del proyecto multimódulo]
+  * [entornoDesarrollo Instalación y Configuración del entorno de desarrollo]
+* [inicioProyecto Primeros pasos en el proyecto]
+* [multimoduleProject Configuración del proyecto multimódulo]
