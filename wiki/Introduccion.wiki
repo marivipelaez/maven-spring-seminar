@@ -1,4 +1,6 @@
 #summary Introducción al seminario de maven y spring
+#sidebar TOC
+<wiki:toc max_depth="4" />
 
 = Introducción =
 
