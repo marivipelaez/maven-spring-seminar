@@ -40,3 +40,7 @@ ngsn@ironman:~/workspace/ms$ mvn eclipse:eclipse
 <groupId>es.tid.ad.seminar.ms</groupId>
 <version>0.0.1-SNAPSHOT</version>
 }}}
+
+== Importar módulos en eclipse ==
+
+[http://maven-spring-seminar.googlecode.com/files/dataModule.png]
