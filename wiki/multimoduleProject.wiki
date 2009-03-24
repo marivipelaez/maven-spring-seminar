@@ -62,3 +62,64 @@ Todos los módulos generados tendrán que ser importados en Eclipse. Se pone com
 
 ==== Añadir proyecto data al Working Set ===
 [http://maven-spring-seminar.googlecode.com/files/addProjectToWorkingSet.png]
+
+== Configuración *pom.xml* del proyecto padre ==
+
+=== Definición de perfiles ===
+Al ser un proyecto multientorno (desarrollo, integración y producción), se ha de configurar al menos un perfil por cada entorno.
+
+<profiles>
+		<!-- Profile desarrollo (Activo por defecto) -->
+		<profile>
+			<id>development</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>development</env>
+				<compilerInfoDebug>true</compilerInfoDebug>
+				<compilerOptimize>false</compilerOptimize>
+			</properties>
+		</profile>
+		<!-- Integración -->
+		<profile>
+			<id>integration</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<env>integration</env>
+				<compilerInfoDebug>true</compilerInfoDebug>
+                <compilerOptimize>false</compilerOptimize>
+			</properties>
+		</profile>
+		
+		<!-- Producción -->
+		<profile>
+			<id>production</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<env>production</env>
+				<compilerInfoDebug>false</compilerInfoDebug>
+                <compilerOptimize>true</compilerOptimize>
+			</properties>
+		</profile>
+	</profiles>
+
+
+=== Configuración de plugins comunes ===
+{{{
+<!-- modificar las opciones del compilador -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>jvm.version</source>
+					<target>jvm.version</target>
+					<encoding>utf-8</encoding>
+					<debug>${compilerInfoDebug}</debug>
+					<optimize>${compilerOptimize}</optimize>
+				</configuration>
+			</plugin>
+}}}
