@@ -76,7 +76,7 @@ En cualquier caso el control de la transaccionalidad de los métodos, será inye
  * Ejemplo de test con una transacción de sólo lectura
 {{{
  @Test
- @Transactional (readOnly = true) /* @Transactional (propagation = Propagation.REQUIRED)*/
+ @Transactional (readOnly = true) 
  public void getExistingUserByPK() {
         Integer userId = 1;
 	User user = userDao.findByPK(userId);
