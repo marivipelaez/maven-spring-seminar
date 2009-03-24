@@ -3,6 +3,7 @@
 = Horario =
 
 *Primera Sesión*
+
 * 9:30h -- 11:00h 
   # Introducción (Configuración de entorno)
   # Buenas Prácticas
@@ -18,6 +19,7 @@
     # Test de Daos
 
 *Segunda Sesión*
+
 * 11:30 -- 14:00h
   # Módulo de servicios
   # Módulo de acceso Web
