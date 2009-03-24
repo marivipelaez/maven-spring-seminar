@@ -11,9 +11,7 @@ Este módulo contiene el acceso a datos utilizando:
   * BookDaoTest: se inicia la conexión con DBUnit. Sólo tiene que existir el schema, los datos se recogerán de un fichero de configuración (dbUnitFile.xml)
 
 {{{
- * es.tid.ad.seminar.ms.dbaccess
-  * es.tid.ad.seminar.ms.dbaccess.daos Contiene las interfaces de los daos
-    * es.tid.ad.seminar.ms.dbaccess.daos.impl Contiene las clases implementadas de los daos
+ '*' es.tid.ad.seminar.ms.dbaccess
+  '*' es.tid.ad.seminar.ms.dbaccess.daos Contiene las interfaces de los daos
+   '*' es.tid.ad.seminar.ms.dbaccess.daos.impl Contiene las clases implementadas de los daos
 }}}
-
-
