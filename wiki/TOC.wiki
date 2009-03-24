@@ -1,4 +1,5 @@
 * [Introduccion Introducción]
+  * [introduccionAMaven Introducción a Maven]
   * [entornoDesarrollo Instalación y Configuración del entorno de desarrollo]
 * [inicioProyecto Primeros pasos en el proyecto]
 * [multimoduleProject Configuración del proyecto multimódulo]
@@ -9,3 +10,4 @@
   * [clientModule Implementación módulo de web]
 * [continousIntegration Integración contínua]
 * [generatingSite Creación de la web de proyecto]
+* [standaloneArchetype Standalone Archetype]
