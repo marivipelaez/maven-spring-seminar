@@ -112,6 +112,9 @@ Al ser un proyecto multientorno (desarrollo, integración y producción), se ha 
 
 === Configuración de plugins comunes ===
 ==== Acceso a SVN ====
+
+Para poder trabajar con SVN desde maven es necesario tener instalado un cliente de SVN por línea de comandos. Para Windows http://www.collab.net/servlets/OCNDirector?id=CSVN1.5.6WINC
+
 Para configurar el acceso al SVN es necesario definir la etiqueta con la configuración del SVN y la configuración de los plugins
 
 ===== Configuración SCM =====
@@ -145,27 +148,32 @@ Este plugin es el que se utiliza para hacer chekin, checkout, ...
 }}}
 
 La configuración del usuario y el password se puede parametrizar en el settings.xml, o bien ejecutar el plugin 
+
 {{{mvn scm:checkout -Dusername=carlosegg -Dpassword=EsteNoEsMiPassword}}}
 
 
 *Plugin para la generación de una release en el SVN*
 
 {{{
-- <!-- 
-  Generar una release. Es necesario tener instalado un cliente de SVN de stanadole
-  --> 
-- <plugin>
-  <groupId>org.apache.maven.plugins</groupId> 
-  <artifactId>maven-release-plugin</artifactId> 
-- <configuration>
-  <username>${scmUser}</username> 
-  <password>${scmPassword}</password> 
-  <tagBase>https://pimpam.googlecode.com/svn/tags</tagBase> 
-  </configuration>
-  </plugin>
+ <plugin>
+   <groupId>org.apache.maven.plugins</groupId> 
+   <artifactId>maven-release-plugin</artifactId> 
+   <configuration>
+     <username>carlosegg</username> 
+     <password>EsteNoEsMiPassowrd</password> 
+     <tagBase>https://maven-spring-seminar.googlecode.com/svn/tags</tagBase> 
+   </configuration>
+ </plugin>
 
 }}}
 
+La configuración del usuario y el password se puede parametrizar en el settings.xml, o bien ejecutar el plugin 
+
+{{{
+   mvn release:prepare -Dusername=carlosegg -Dpassword=EsteNoEsMiPassword
+   mvn release:perform -Dusername=carlosegg -Dpassword=EsteNoEsMiPassword
+
+}}}
 
 
 ==== Plugin compilador (maven-compiler-plugin) ====
