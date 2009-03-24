@@ -1,4 +1,5 @@
 #summary Entorno de desarrollo necesario para el desarrollo del seminario de Spring y Maven
+#sidebar TOC
 <wiki:toc max_depth="4" />
 = Entorno de desarrollo =
 == JDK1.6.0 ==
