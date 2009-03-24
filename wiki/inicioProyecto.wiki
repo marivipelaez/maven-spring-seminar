@@ -14,7 +14,7 @@ ngsn@ironman:~/workspace/ms$ mvn eclipse:eclipse
 
 [http://maven-spring-seminar.googlecode.com/files/createProject.png]
 
-== Enable maven ==
+== Habilitar proyecto maven en Eclipse ==
 
 [http://maven-spring-seminar.googlecode.com/files/habilitaMavenEclipse.png]
 
