@@ -184,9 +184,9 @@ El plugin del compilador no es necesario añadirlo al pom.xml a no ser que se te
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>jvm.version</source>
-					<target>jvm.version</target>
-					<encoding>utf-8</encoding>
+					<source>${jvm.version}</source>
+					<target>${jvm.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
 					<debug>${compilerInfoDebug}</debug>
 					<optimize>${compilerOptimize}</optimize>
 				</configuration>
