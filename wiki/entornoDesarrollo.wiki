@@ -12,5 +12,5 @@
 == Eclipse Ganymede ==
  Seguir el manual de instalación de eclipse definido en http://pimpam.googlecode.com/files/installEclipse.pdf. Además instalar el plugin de Spring IDE
 
-
+ Aunque se ha seleccionado Eclipse Ganymede como entorno de desarrollo en http://pimpam.googlecode.com/files/installNetbeans.pdf están las capturas de pantalla de la instalación de Netbeans con el plugin de Maven y su posterior configuración.
 
