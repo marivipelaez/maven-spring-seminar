@@ -46,3 +46,7 @@ ngsn@ironman:~/workspace/ms$ mvn eclipse:eclipse
 [http://maven-spring-seminar.googlecode.com/files/dataModule.png]
 
 [http://maven-spring-seminar.googlecode.com/files/configureWorkingSet.png]
+
+[http://maven-spring-seminar.googlecode.com/files/SelectWorkingSet%20.png]
+
+[http://maven-spring-seminar.googlecode.com/files/addProjectToWorkingSet.png]
