@@ -22,5 +22,6 @@
 
 * 11:30 -- 14:00h
   # Módulo de servicios
+    # Objectos mock
   # Módulo de acceso Web
   # Cliente Standalone
