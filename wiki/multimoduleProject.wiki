@@ -124,10 +124,47 @@ Para configurar el acceso al SVN es necesario definir la etiqueta con la configu
   <url>http://maven-spring-seminar.googlecode.com/svn/trunk/ms</url> 
   </scm>
 }}}
+====== Configuración plugins de acceso al SVN ======
 
-====== Plugin de acceso al SVN ======
+*Plugin de acceso al SVN*
 
-====== Plugin de generación de release ======
+Este plugin es el que se utiliza para hacer chekin, checkout, ... 
+{{{
+ <!--  integración con SVN  --> 
+ <plugin>
+  <groupId>org.apache.maven.plugins</groupId> 
+  <artifactId>maven-scm-plugin</artifactId> 
+  <configuration>
+     <goals>install</goals> 
+     <checkoutDirectory>/home/ngsn/NGSN/dev/workspace</checkoutDirectory>  
+     <username>carlosegg</username> 
+     <password>EsteNoEsMiPassword</password> 
+    <tagBase>https://maven-spring-seminar.googlecode.com/svn/tags</tagBase> 
+  </configuration>
+ </plugin>
+}}}
+
+La configuración del usuario y el password se puede parametrizar en el settings.xml, o bien ejecutar el plugin 
+{{{mvn scm:checkout -Dusername=carlosegg -Dpassword=EsteNoEsMiPassword}}}
+
+
+*Plugin para la generación de una release en el SVN*
+
+{{{
+- <!-- 
+  Generar una release. Es necesario tener instalado un cliente de SVN de stanadole
+  --> 
+- <plugin>
+  <groupId>org.apache.maven.plugins</groupId> 
+  <artifactId>maven-release-plugin</artifactId> 
+- <configuration>
+  <username>${scmUser}</username> 
+  <password>${scmPassword}</password> 
+  <tagBase>https://pimpam.googlecode.com/svn/tags</tagBase> 
+  </configuration>
+  </plugin>
+
+}}}
 
 
 
