@@ -21,3 +21,22 @@ ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.se
 ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=client -Dpackage=es.tid.ad.seminar.ms.client -DinteractiveMode=false archetype:generate
 ngsn@ironman:~/workspace/ms$ mvn eclipse:eclipse
 }}}
+
+== Editar los pom.xml de cada módulo ==
+
+* Borrar dependencies
+{{{
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+}}}
+* Dejar las etiquetas groupId y version del proyecto padre y eliminarlas del proyecto hijo. Las versiones se crearán del proyecto no de cada uno de los módulos, por lo tanto no tiene sentido tener la etiqueta versión.
+{{{
+<groupId>es.tid.ad.seminar.ms</groupId>
+<version>0.0.1-SNAPSHOT</version>
+}}}
