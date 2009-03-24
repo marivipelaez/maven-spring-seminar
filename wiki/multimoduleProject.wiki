@@ -1,4 +1,7 @@
-#summary One-sentence summary of this page.
+#summary Configurar proyecto multimódulo
+
+
+<wiki:toc max_depth="2" />
 
 = Proyecto multimódulo =
 
