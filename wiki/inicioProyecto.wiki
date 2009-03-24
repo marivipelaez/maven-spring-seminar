@@ -78,7 +78,7 @@ pom.xml inicial
 }}}
 
 
-=== Adicción dependencias ===
+=== Adición dependencias ===
 
 La librería de trazas que se utilizará será commons-logging (scope compile), que nos aislará de del sistema de trazas que se utilice por debajo (java-logging (scope runtime), o log4j (scope runtime)). Para nuestro ejemplo las trazas sólo se mostrarán por pantalla, o se escribirán en un fichero, por lo que no hace faltan las librerías (dependencias transitivas) que utilizan tanto commons-logging como log4j.
 
