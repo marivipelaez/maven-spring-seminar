@@ -68,6 +68,7 @@ Todos los módulos generados tendrán que ser importados en Eclipse. Se pone com
 === Definición de perfiles ===
 Al ser un proyecto multientorno (desarrollo, integración y producción), se ha de configurar al menos un perfil por cada entorno.
 
+{{{
 <profiles>
 		<!-- Profile desarrollo (Activo por defecto) -->
 		<profile>
@@ -107,9 +108,12 @@ Al ser un proyecto multientorno (desarrollo, integración y producción), se ha 
 			</properties>
 		</profile>
 	</profiles>
-
+}}}
 
 === Configuración de plugins comunes ===
+==== Plugin compilador (maven-compiler-plugin) ====
+El plugin del compilador no es necesario añadirlo al pom.xml a no ser que se tengan que modificar las propiedades por defecto de éste.
+
 {{{
 <!-- modificar las opciones del compilador -->
 			<plugin>
@@ -123,3 +127,58 @@ Al ser un proyecto multientorno (desarrollo, integración y producción), se ha 
 				</configuration>
 			</plugin>
 }}}
+
+==== Plugin para la generación del jar (maven-jar-plugin) ====
+Cada módulo generará un jar (a excepción del módulo Web) en la fase de package, si hay que cambiar las propiedades del plugin:
+
+{{{
+<!-- Como se ha de generar el jar del proyecto -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<!-- Por defecto siempre se arranca la aplicación con Bootstrap -->
+							<mainClass>${package}.main.Bootstrap 
+							</mainClass>
+							<packageName>${project.groupId}.${project.artifactId} </packageName>
+							<addClasspath>true</addClasspath>
+							<addExtensions />
+							<!--
+								Todos los jars de los que se dependa estarán en el directorio
+								lib
+							-->
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+						<manifestEntries>
+						    <!-- Se adelante al classpath el directorio conf/        
+						    -->
+							<Class-Path>conf/</Class-Path>
+							<Released-Date> ${buildNumber}</Released-Date>
+							<Implementation-Version> ${pom.version}</Implementation-Version>
+							<Implementation-Title> ${project.name} - ${buildNumber} 
+							</Implementation-Title>
+							<mode>${env}</mode>
+							<url>${pom.url}</url>
+							<organization>${project.organization.name} 
+							</organization>
+							<Built-By>carlosg</Built-By>
+							<developer>Carlos E. Gómez Gómez</developer>
+							<developer-mail>carlosg@tid.es</developer-mail>
+						</manifestEntries>
+					</archive>
+					<excludes>
+						<!--
+							Estos dos ficheros irán el directorio conf/ de la aplicación
+							cuando se haga el assembly. El main.properties con la
+							configuración del componente se ha de agregar cuando se use el
+							componente.
+						-->
+						<exclude>log4j.xml</exclude>
+						<exclude>main.properties</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+}}}
+
