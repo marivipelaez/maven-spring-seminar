@@ -63,6 +63,11 @@ pom.xml inicial
   <name>ms</name>
   <url>http://maven.apache.org</url>
   <properties>
+    <!-- Forzamos a los plugins a utilizar UTF-8, para evitar problemas con
+         los encodings por defectos de los diferentes sistemas operativos -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <copyright.year>2009</copyright.year>
     <jvm.version>1.6</jvm.version>
     <junit.version>4.5</junit.version>
     <spring.version>2.5.6</spring.version>
