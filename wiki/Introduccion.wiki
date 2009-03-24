@@ -8,6 +8,24 @@ Este seminario pretende ser una breve introducción práctica al uso de [http://
 
 El desarrollo de este proyecto seguirán las siguientes [http://reposbcn.hi.inet/maven/site/es.tid.cd.archetypes/standalone-archetype/developerGuide.html Normas de desarrollo].
 
+== Maven ==
+
 El seminario comenzará con una pequeña [http://pimpam.googlecode.com/svn/trunk/standalone-archetype/src/site/resources/Introducci%c3%b3n%20a%20Maven%202.ppt introducción a maven]
 
-Y una definición de !SpringFramework [http://es.wikipedia.org/wiki/Spring_Framework]
+== Spring ==
+Y una definición de !SpringFramework:
+El SpringFramework es un framework de código abierto de desarrollo de aplicaciones para la plataforma Java. 
+[http://es.wikipedia.org/wiki/Spring_Framework]
+
+=== Conceptos básicos ===
+
+ * Inyección de dependencias (IoC, Inversion of Control):
+"La inyección de dependencias radica en resolver las dependecias de cada clase (atributos) generando los objetos cuando se arranca la aplicación y luego inyectarlos en los demás objetos que los necesiten a través de métodos set o bien a través del constructor, pero estos objetos se instancian una vez, se guardan en una factoría y se comparten por todos los usuarios (al menos en el caso de Spring) y nos evitamos tener que andar extendiendo clases o tumbar el servidor de la BD.
+
+Spring soporta inyección de dependencias a través del constructor y a través de métodos set pero se aconseja hacerlo a través de métodos set. Vamos a ver que habría que hacer para utilizar inyección de dependencias con Spring a través de métodos set."
+
+[http://www.programania.net/diseno-de-software/inyeccion-de-dependencias-con-spring/]
+ * Programación orientada a aspectos (AOP)
+"La Programación Orientada a Aspectos (POA) es un paradigma de programación relativamente reciente cuya intención es permitir una adecuada modularización de las aplicaciones y posibilitar una mejor separación de conceptos. Gracias a la POA se pueden encapsular los diferentes conceptos que componen una aplicación en entidades bien definidas, eliminando las dependencias entre cada uno de los módulos. De esta forma se consigue razonar mejor sobre los conceptos, se elimina la dispersión del código y las implementaciones resultan más comprensibles, adaptables y reusables. Varias tecnologías con nombres diferentes se encaminan a la consecución de los mismos objetivos y así, el término POA es usado para referirse a varias tecnologías relacionadas como los métodos adaptivos, los filtros de composición, la programación orientada a sujetos o la separación multidimensional de competencias."
+
+[http://es.wikipedia.org/wiki/Programaci%C3%B3n_Orientada_a_Aspectos]
