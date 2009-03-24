@@ -2,9 +2,9 @@
 
 = Introducción =
 
-Si seguimos las normas de TDD (Test Driven Development) antes de empezar a codificar ninguna clase, se debe crear la clase de test. Y este será nuestro procedimiento habitual. Esta clase se creará en: 
+Si seguimos las normas de TDD (Test Driven Development) antes de empezar a implementar las interfaces, se debe crear la clase de test, por supuesto, fallará!! Y este será nuestro procedimiento habitual. Las clases de test se crearán en el mismo package que las interfaces más test: 
 {{{
-es.tid.ad.seminar.ms.daos
+es.tid.ad.seminar.ms.daos.test
 }}}
 
 Normalmente se implementará al menos una clase de test por clase implementada. Definiéndose un test correcto y uno con error, por lo menos, para cada método. Aunque deberían existir:
