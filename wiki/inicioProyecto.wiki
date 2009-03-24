@@ -2,8 +2,9 @@
 <wiki:toc max_depth="4" />
 
 = Inicio de Proyecto =
+== Crear proyecto a partir del arquetipo básico de maven ==
 
-Situarse en el directorio workspace de eclipse. A partir de ahora ($WORKSPACE)
+Situarse en el directorio workspace de eclipse. 
 {{{
 ngsn@ironman:~/workspace$ mvn -DgroupId=es.tid.ad.seminar -DartifactId=ms -Dpackage=es.tid.ad.seminar.ms -Dversion=0.0.1-SNAPSHOT -DinteractiveMode=false
 ngsn@ironman:~/workspace$ cd ms
