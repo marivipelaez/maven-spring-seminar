@@ -10,8 +10,6 @@ Las razones para realizra un proyecto multimódulo son:
 == Generación de los diferentes módulos ==
 
 {{{
-ngsn@ironman:~/workspace$ cd ms
-ngsn@ironman:~/workspace/ms$ mvn eclipse:eclipse
 ngsn@ironman:~/workspace/ms$ mvn -DartifactId=data -Dpackage=es.tid.ad.seminar.ms.data -DinteractiveMode=false archetype:generate
 ngsn@ironman:~/workspace/ms$ mvn -DartifactId=services -Dpackage=es.tid.ad.seminar.ms.services -DinteractiveMode=false archetype:generate
 ngsn@ironman:~/workspace/ms$ mvn -DartifactId=dbaccess -Dpackage=es.tid.ad.seminar.ms.dbaccess -DinteractiveMode=false archetype:generate
