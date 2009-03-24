@@ -128,6 +128,37 @@ El plugin del compilador no es necesario añadirlo al pom.xml a no ser que se te
 			</plugin>
 }}}
 
+==== Plugin para la identifiación del número de versión del componente(buildnumber-maven-plugin) ====
+Dentro de una versión de SNAPSHOT del componente se pretende distiguir los diferentes buils que se hacen, para ello se añade una etiqueta *buildnumber* con valor {0,date,yyyy-MM-dd} identificando el número de versión. Esta etiqueta será utilizada por el maven-jar-plugin.
+
+{{{
+			<plugin>
+				<!--
+				    Generación del número de versión. Es útil para distinguir dentro de una versión de SNAPSHOT 
+				    del componente ya que se añade una etiqueta con la fecha de cuando se generó la versión
+				-->
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin 
+				</artifactId>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<format>{0,date,yyyy-MM-dd}</format>
+					<items>
+						<item>timestamp</item>
+					</items>
+					<doCheck>true</doCheck>
+					<doUpdate>true</doUpdate>
+				</configuration>
+			</plugin>
+
+}}}
 ==== Plugin para la generación del jar (maven-jar-plugin) ====
 Cada módulo generará un jar (a excepción del módulo Web) en la fase de package, si hay que cambiar las propiedades del plugin:
 
