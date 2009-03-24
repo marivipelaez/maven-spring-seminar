@@ -7,4 +7,4 @@
 {{{
 es.tid.ad.seminar.ms.data
 }}}
-Este proyecto contendrá sólo POJOs (Plain-Old Java Objects)
+Este paquete contendrá sólo los POJOs (Plain-Old Java Objects) necesarios para la configuración del proyecto. 
