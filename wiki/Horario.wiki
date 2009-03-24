@@ -4,9 +4,9 @@
 
 *Primera Sesión*
 * 9:30h -- 11:00h 
-  #Introducción (Configuración de entorno)
-  #Buenas Prácticas
-  #Maven
+  # Introducción (Configuración de entorno)
+  # Buenas Prácticas
+  # Maven
 * 11:00 -- 11:30h -- Café
 * 11:30 -- 13:00h 
   # Introducción a Spring
@@ -18,5 +18,7 @@
 
 *Segunda Sesión*
 * 11:30 -- 14:00h
-
+  # Módulo de servicios
+  # Módulo de acceso Web
+  # Cliente Standalone
 
