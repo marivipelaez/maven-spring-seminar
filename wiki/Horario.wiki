@@ -7,7 +7,8 @@
   # Introducción (Configuración de entorno)
   # Buenas Prácticas
   # Maven
-* 11:00 -- 11:30h -- Café
+* 11:00 -- 11:30h 
+  # Café
 * 11:30 -- 13:00h 
   # Introducción a Spring
   # ¿Cómo empezar un proyecto? (Módulos del proyecto)
@@ -21,4 +22,3 @@
   # Módulo de servicios
   # Módulo de acceso Web
   # Cliente Standalone
-
