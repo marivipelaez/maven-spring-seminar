@@ -7,7 +7,7 @@
   * [servicesModule Implementación módulo de servicios]
   * [dataAccessModule Implementación módulo de persistencia de datos]
   * [webModule Implementación módulo de web]
-  * [clientModule Implementación módulo de web]
+  * [clientModule Implementación módulo de cliente]
 * [continousIntegration Integración contínua]
 * [generatingSite Creación de la web de proyecto]
 * [standaloneArchetype Standalone Archetype]
