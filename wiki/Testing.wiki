@@ -23,7 +23,7 @@ protected BookDao bookDao;
 *Cada propiedad inyectada por autowire*, deberá disponer de, al menos, el método setter correspondiente.
 
 Para probar los Daos se pueden seguir dos filosofías, por lo menos:
-# Utilizar dbUnit (que para esto está):
+  # Utilizar dbUnit (que para esto está):
 {{{
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration (locations={"classpath*:**testContext.xml"})
