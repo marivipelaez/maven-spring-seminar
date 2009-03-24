@@ -1,5 +1,7 @@
 #summary Inicio del proyecto a partir del arquetipo
+#sidebar TOC
 <wiki:toc max_depth="4" />
+
 
 = Inicio de Proyecto =
 == Crear proyecto a partir del arquetipo básico de maven ==
