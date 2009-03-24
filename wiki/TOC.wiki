@@ -6,7 +6,7 @@
   * [dataModule Implementación módulo de datos]
   * [servicesModule Implementación módulo de servicios]
   * [dataAccessModule Implementación módulo de persistencia de datos]
-    * [testing Testing]
+    * [Testing Testing]
   * [webModule Implementación módulo de web]
   * [clientModule Implementación módulo de cliente]
 * [continousIntegration Integración contínua]
