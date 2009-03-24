@@ -23,7 +23,7 @@ protected BookDao bookDao;
 *Cada propiedad inyectada por autowire*, deberá disponer de, al menos, el método setter correspondiente.
 
 Para probar los Daos se pueden seguir dos filosofías, por lo menos:
-  # Utilizar dbUnit (que para esto está):
+  # Utilizar dbUnit (que para esto está): permite mantener los datos de test en un fichero xml, construir y rellenar una instancia de db y dispone de métodos y clases específicas para testar accesos a ddbb.
 {{{
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration (locations={"classpath*:**testContext.xml"})
@@ -61,23 +61,39 @@ Esta clase debe implementar el método :
         }
     }
 }}}
+  # Cargando iniciando una conexión JDBC e implementando los rollbacks adecuados por estar realizando tests. La db debe estar creada y rellena con los datos adecuados para realizar el test.
+{{{
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration (locations={"classpath*:**testContext.xml"})
+public class UserDaoTest {
 
 
-Y se crearán los tests de los métodos solicitados:
+}
+}}}
+
+En cualquier caso el control de la transaccionalidad de los métodos, será inyectado por Spring.
+
+ * Ejemplo de test con una transacción de sólo lectura
 {{{
  @Test
  @Transactional (readOnly = true) /* @Transactional (propagation = Propagation.REQUIRED)*/
- public void getNuevoPojoById() {
-        NuevoPojoId pk = nnn;
-	NuevoPojo np = nuevoDao.findByPK(pk);
-        Assert.assertNotNull(np);
+ public void getExistingUserByPK() {
+        Integer userId = 1;
+	User user = userDao.findByPK(userId);
+        notNull(user);
  }
 }}}
-
-Editar /src/test/resources/es/tid/aoc/hw/dbaccess/config/testContext.xml y añadir la siguiente línea:
+ 
+ * Ejemplo de test con una transacción de escritura
 {{{
-<bean id="nuevoDao" class="es.tid.aoc.hw.dbaccess.daos.impl.NuevoHibernateDao" autowire="byName" />
+ @Test
+ @Transactional (propagation = Propagation.REQUIRED)
+ public void addNonExistingUser() {
+        User user = new User();
+        user.setName("pepito");
+	userDao.save();
+        user = userDao.findByName("pepito");
+        notNull(user);
+        notNull(user.getUserId());
+ }
 }}}
-
-Antes de ejecutarlo, debemos rellenar los datos de test. Estos datos se encuentran en src/test/resources/dbUnitTestFile.xml. Para rellenarlos, editar este fichero y añadir los registros de NuevaTabla suficientes para hacer tests.
-Una vez hecho esto, se puede lanzar el test.
