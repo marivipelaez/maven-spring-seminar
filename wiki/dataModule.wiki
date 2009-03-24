@@ -2,14 +2,8 @@
 #sidebar TOC
 <wiki:toc max_depth="4" />
 
-= Introduction =
+= Introducción =
 
-Add your content here.
+'es.tid.ad.seminar.ms.data'
+Este proyecto contendrá sólo POJOs (Plain-Old Java Objects)
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
