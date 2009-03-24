@@ -111,6 +111,26 @@ Al ser un proyecto multientorno (desarrollo, integración y producción), se ha 
 }}}
 
 === Configuración de plugins comunes ===
+==== Acceso a SVN ====
+Para configurar el acceso al SVN es necesario definir la etiqueta con la configuración del SVN y la configuración de los plugins
+
+===== Configuración SCM =====
+{{{
+<scm>
+  <!-- Acceso en modo lectura para usuarios anónimos -->
+  <connection>scm:svn:http://maven-spring-seminar.googlecode.com/svn/trunk/ms</connection> 
+  <!-- Acceso en modo escritura/lectura para los usuarios dados de alta en el proyecto -->
+  <developerConnection>scm:svn:https://maven-spring-seminar.googlecode.com/svn/trunk/ms</developerConnection> 
+  <url>http://maven-spring-seminar.googlecode.com/svn/trunk/ms</url> 
+  </scm>
+}}}
+
+====== Plugin de acceso al SVN ======
+
+====== Plugin de generación de release ======
+
+
+
 ==== Plugin compilador (maven-compiler-plugin) ====
 El plugin del compilador no es necesario añadirlo al pom.xml a no ser que se tengan que modificar las propiedades por defecto de éste.
 
