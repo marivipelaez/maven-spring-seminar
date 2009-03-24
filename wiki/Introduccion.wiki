@@ -13,8 +13,8 @@ El desarrollo de este proyecto seguirán las siguientes [http://reposbcn.hi.inet
 El seminario comenzará con una pequeña [http://pimpam.googlecode.com/svn/trunk/standalone-archetype/src/site/resources/Introducci%c3%b3n%20a%20Maven%202.ppt introducción a maven]
 
 == Spring ==
-Y una definición de !SpringFramework:
-El SpringFramework es un framework de código abierto de desarrollo de aplicaciones para la plataforma Java. 
+Y una definición de !SpringFramework: framework de código abierto para desarrollo de aplicaciones para la plataforma Java. 
+
 [http://es.wikipedia.org/wiki/Spring_Framework]
 
 === Conceptos básicos ===
@@ -25,7 +25,9 @@ El SpringFramework es un framework de código abierto de desarrollo de aplicacio
 Spring soporta inyección de dependencias a través del constructor y a través de métodos set pero se aconseja hacerlo a través de métodos set. Vamos a ver que habría que hacer para utilizar inyección de dependencias con Spring a través de métodos set."
 
 [http://www.programania.net/diseno-de-software/inyeccion-de-dependencias-con-spring/]
+
  * Programación orientada a aspectos (AOP)
-"La Programación Orientada a Aspectos (POA) es un paradigma de programación relativamente reciente cuya intención es permitir una adecuada modularización de las aplicaciones y posibilitar una mejor separación de conceptos. Gracias a la POA se pueden encapsular los diferentes conceptos que componen una aplicación en entidades bien definidas, eliminando las dependencias entre cada uno de los módulos. De esta forma se consigue razonar mejor sobre los conceptos, se elimina la dispersión del código y las implementaciones resultan más comprensibles, adaptables y reusables. Varias tecnologías con nombres diferentes se encaminan a la consecución de los mismos objetivos y así, el término POA es usado para referirse a varias tecnologías relacionadas como los métodos adaptivos, los filtros de composición, la programación orientada a sujetos o la separación multidimensional de competencias."
+"La Programación Orientada a Aspectos (AOP) es un paradigma de programación relativamente reciente cuya intención es permitir una adecuada modularización de las aplicaciones y posibilitar una mejor separación de conceptos. Gracias a la AOP se pueden encapsular los diferentes conceptos que componen una aplicación en entidades bien definidas, eliminando las dependencias entre cada uno de los módulos. De esta forma se consigue razonar mejor sobre los conceptos, se elimina la dispersión del código y las implementaciones resultan más comprensibles, adaptables y reusables. Varias tecnologías con nombres diferentes se encaminan a la consecución de los mismos objetivos y así, el término AOP es usado para referirse a varias tecnologías relacionadas como los métodos adaptivos, los filtros de composición, la programación orientada a sujetos o la separación multidimensional de competencias."
+   * Aspect (Aspecto) "es la funcionalidad que se cruza a lo largo de la aplicación (cross-cutting) que se va a implementar de forma modular y separada del resto del sistema. El ejemplo más común y simple de un aspecto es el logging (registro de sucesos) dentro del sistema, ya que necesariamente afecta a todas las partes del sistema que generan un suceso."
 
 [http://es.wikipedia.org/wiki/Programaci%C3%B3n_Orientada_a_Aspectos]
