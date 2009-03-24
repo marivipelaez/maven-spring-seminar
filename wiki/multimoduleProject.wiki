@@ -1,5 +1,5 @@
 #summary Configurar proyecto multimódulo
-
+#sidebar TOC
 
 <wiki:toc max_depth="4" />
 
