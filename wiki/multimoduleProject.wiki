@@ -161,7 +161,7 @@ Cada módulo generará un jar (a excepción del módulo Web) en la fase de packa
 							</Implementation-Title>
 							<mode>${env}</mode>
 							<url>${pom.url}</url>
-							<organization>${project.organization.name} 
+							<organization>Telefónica Investigación y Desarrollo
 							</organization>
 							<Built-By>carlosg</Built-By>
 							<developer>Carlos E. Gómez Gómez</developer>
@@ -181,4 +181,3 @@ Cada módulo generará un jar (a excepción del módulo Web) en la fase de packa
 				</configuration>
 			</plugin>
 }}}
-
