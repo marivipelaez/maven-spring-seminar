@@ -85,3 +85,47 @@ Pero existirá un único applicationContext por aplicación. Para esto los conte
 }}}
 
 == Inyección de dependencias ==
+
+Una vez declarado un bean en un contexto, puede referenciarse desde cualquier punto de la aplicación. Esto significa dos cosas:
+  # En un proyecto con varios applicationContext, los objectos son accesibles desde cualquiera de los ficheros xml:
+{{{
+Editando el services.xml....
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-autowire="byName"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+<!-- En el dbaccessContext.xml se han definido los daos -->
+<!-- Include the configuration files of the other components -->
+	<import
+		resource="classpath*:dbaccessContext.xml" />
+......
+       <bean id="userService" class="es.tid.ad.seminar.ms.services.impl.UserService">
+           <property name="userDao" ref="userDao" />
+       </bean>
+......
+</beans>
+}}}
+
+  # Los objectos se pueden inyectar en cualquier clase uitlizando las anotaciones correspondientes:
+{{{
+......
+@ContextConfiguration(locations = { "classpath*:**testContext.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)
+public class UserDaoTest {
+
+    final static Log LOG = LogFactory.getLog(UserDaoTest.class);
+
+    @Autowired(required = true)
+    private UserDao userDao;
+
+......
+
+ public void setUserDao(UserDao userDao) {
+	this.userDao = userDao;
+    }
+}
+}}}
+
+En cualquiera de los dos casos, "la inyección" se realiza através del método setter de la propiedad, por lo que es obligatorio crearlo.
