@@ -42,7 +42,7 @@ AbstractApplicationContext ctx = new ClassPathXmlApplicationContext(
 }
 }}}
 
-== Configurar el contexto de Spring ==
+= Configurar el contexto de Spring =
 Se debe generar un descriptor de contexto para cada módulo del proyecto. El mínimo será:
 
 {{{
@@ -84,7 +84,7 @@ Pero existirá un único applicationContext por aplicación. Para esto los conte
 
 }}}
 
-== Inyección de dependencias ==
+= Inyección de dependencias =
 
 Una vez declarado un bean en un contexto, puede referenciarse desde cualquier punto de la aplicación. Esto significa dos cosas:
   # En un proyecto con varios applicationContext, los objectos son accesibles desde cualquiera de los ficheros xml:
@@ -129,3 +129,5 @@ public class UserDaoTest {
 }}}
 
 En cualquiera de los dos casos, "la inyección" se realiza através del método setter de la propiedad, por lo que es obligatorio crearlo.
+
+= Helpers =
