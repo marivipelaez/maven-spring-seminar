@@ -284,3 +284,29 @@ Cada módulo generará un jar (a excepción del módulo Web) en la fase de packa
 				</configuration>
 			</plugin>
 }}}
+
+=== Configuración de repositorios donde se hará la distribución del proyecto ===
+{{{
+    <distributionManagement>
+		<!-- Repositorio para hacer el deploy de las releases
+		-->
+        <repository>
+            <id>${repoMavenId}</id>
+            <name>${repoMavenName}</name>
+            <url>${repoMavenUrl}</url>
+        </repository>
+		<!-- Repositorio de snapshot de Telefónica I+D Barcelona -->
+        <snapshotRepository>
+            <id>${repoMavenSnapshotId}</id>
+            <name>${repoMavenSnapshotName}</name>
+            <url>${repoMavenSnapshotUrl}</url>
+        </snapshotRepository>
+		<!-- Máquina donde se publica el site del proyecto -->
+        <site>
+            <id>${repoSiteId}</id>
+            <name>${repoSiteName}</name>
+            <url>${repoSiteUrl}/${groupId}/${artifactId} 
+            </url>
+        </site>
+    </distributionManagement>
+}}}
