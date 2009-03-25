@@ -18,14 +18,21 @@ Las razones para realizar un proyecto multimódulo son:
 
 {{{
 ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=data -Dpackage=es.tid.ad.seminar.ms.data -DinteractiveMode=false archetype:generate
-ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=services -Dpackage=es.tid.ad.seminar.ms.services -DinteractiveMode=false archetype:generate
 ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=dbaccess -Dpackage=es.tid.ad.seminar.ms.dbaccess -DinteractiveMode=false archetype:generate
+ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=services -Dpackage=es.tid.ad.seminar.ms.services -DinteractiveMode=false archetype:generate
 ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=web -Dpackage=es.tid.ad.seminar.ms.web -DinteractiveMode=false -DarchetypeArtifactId=maven-archetype-webapp archetype:generate
 ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=client -Dpackage=es.tid.ad.seminar.ms.client -DinteractiveMode=false archetype:generate
 ngsn@ironman:~/workspace/ms$ mvn eclipse:eclipse
 }}}
 
 == Editar los pom.xml de cada módulo ==
+
+== Añadir a cada pom.xml ===
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+}}}
 
 === Borrar dependencias ===
 {{{
