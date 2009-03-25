@@ -131,3 +131,6 @@ public class UserDaoTest {
 En cualquiera de los dos casos, "la inyección" se realiza através del método setter de la propiedad, por lo que es obligatorio crearlo.
 
 = Helpers =
+
+ * Importar ficheros de propiedades
+ * Acceder a recursos de mensajes
