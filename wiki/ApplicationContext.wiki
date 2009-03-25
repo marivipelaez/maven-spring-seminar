@@ -2,7 +2,11 @@
 
 = Introducción =
 
-El fichero de configuración básico de Spring es el contexto de aplicación (application context). Consiste en un fichero XML donde se añadirán todos los objectos que deberán existir en la aplicación al inicializarse la misma. En el caso de una aplicación web, el contexto lo levanta el contenedor de servlets y, al configurar el servlet correspondiente a Spring en el web.xml, se indicará el applicationContext.xml:
+El fichero de configuración básico de Spring es el contexto de aplicación (application context). Consiste en un fichero XML donde se añadirán todos los objectos que deberán existir en la aplicación al inicializarse la misma. 
+
+= Levantar el contexto de Spring = 
+== En una aplicación web ==
+En el caso de una aplicación web, el contexto lo levanta el contenedor de servlets y, al configurar el servlet correspondiente a Spring en el web.xml, se indicará el applicationContext.xml:
 {{{
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
@@ -22,4 +26,17 @@ El fichero de configuración básico de Spring es el contexto de aplicación (ap
 </listener>
 ....
 </web-app>
+}}}
+
+== En una aplicación standalone ==
+En el main se añadirá:
+{{{
+public static void main(String[] args) throws Exception {
+....
+final static String CONTEXT = "applicationContext.xml";
+String[] contextPaths = new String[] { CONTEXT };
+AbstractApplicationContext ctx = new ClassPathXmlApplicationContext(
+		contextPaths);
+....
+}
 }}}
