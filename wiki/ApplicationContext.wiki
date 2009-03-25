@@ -83,3 +83,5 @@ Pero existirá un único applicationContext por aplicación. Para esto los conte
 </beans>
 
 }}}
+
+== Inyección de dependencias ==
