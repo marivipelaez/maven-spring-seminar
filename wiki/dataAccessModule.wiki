@@ -15,6 +15,8 @@ Este módulo contiene el acceso a datos utilizando:
    - es.tid.ad.seminar.ms.dbaccess.daos.impl Contiene las clases implementadas de los daos
 }}}
 
+= ApplicationContext = 
+
 = Modelo de datos = 
 
 Para generar el modelo de datos se ha utilizado !MySql Workbench, porque permite configurar la DB gráficamente y generar el script de creación automáticamente.
