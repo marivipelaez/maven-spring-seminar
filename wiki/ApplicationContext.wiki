@@ -41,3 +41,45 @@ AbstractApplicationContext ctx = new ClassPathXmlApplicationContext(
 ....
 }
 }}}
+
+== Configurar el contexto de Spring ==
+Se debe generar un descriptor de contexto para cada módulo del proyecto. El mínimo será:
+
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd" 
+	default-autowire="byName">
+	
+	
+    <bean id="..." class="...">
+        ...
+    </bean>
+    .....
+	
+    <bean id="..." class="...">
+        ...
+    </bean>
+</beans>
+}}}
+
+Pero existirá un único applicationContext por aplicación. Para esto los contextos se agrupan, importándose:
+
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-autowire="byName"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- Include the configuration files of the other components -->
+	<import
+		resource="classpath*:dbaccessContext.xml" />
+        <import
+		resource="classpath*:servicesContext.xml" />
+....
+</beans>
+
+}}}
