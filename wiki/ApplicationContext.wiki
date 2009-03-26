@@ -184,7 +184,7 @@ Existen dos formas de abordar AOP:
 </beans>
 }}}
 
- * Y la otra es definir el aspecto y cómo tratarlo en el applicationContext, pero configurarlo en cada una clases correspondientes, mediante anotaciones
+ * Y la otra es definir el aspecto y cómo tratarlo en el applicationContext, pero configurarlo en cada una clases correspondientes, mediante anotaciones:
 {{{
 <?xml version="1.0" encoding="UTF-8"?>
 <beans 
