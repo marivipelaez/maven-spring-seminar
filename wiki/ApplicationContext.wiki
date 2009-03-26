@@ -130,6 +130,96 @@ public class UserDaoTest {
 
 En cualquiera de los dos casos, "la inyección" se realiza através del método setter de la propiedad, por lo que es obligatorio crearlo.
 
+= Aspect Oriented Programming =
+
+Existen dos formas de abordar AOP, una es incluir toda la configuración en el applicationContext:
+{{{
+....
+<!-- Database transaction manager -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	</bean>
+
+	<!-- Transaction proxy factory bean -->
+	<bean id="txProxyFactoryBean" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+
+		<property name="transactionManager">
+			<ref local="transactionManager" />
+		</property>
+
+		<property name="transactionAttributes">
+			<props>
+				<prop key="activate*">PROPAGATION_REQUIRED</prop>
+				<prop key="confirm*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="send*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="modify*">PROPAGATION_REQUIRED</prop>
+				<prop key="new*">PROPAGATION_REQUIRED</prop>
+				<prop key="read*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+
+		<property name="preInterceptors">
+			<list></list>
+		</property>
+
+		<property name="postInterceptors">
+			<list></list>
+		</property>
+	</bean>
+
+....
+
+<bean id="worldsService" parent="txProxyFactoryBean">
+		<property name="target" ref="worldsServiceTarget" />
+	</bean>
+	<bean id="worldsServiceTarget"
+		class="es.tid.aoc.hw.ws.services.impl.WorldsService" />
+....
+</beans>
+}}}
+
+Y la otra es sólo definir el aspecto y cómo tratarlo, pero configurarlo en las clases correspondiente mediante anotaciones
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd" 
+	default-autowire="byName">
+......
+<bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
+......
+</beans>
+
+}}}
+
+Y, en este caso en las clases de los servicios se añadirá en cada método la configuración de aspecto pertinente:
+{{{
+....
+public final class BorrowingService implements
+	es.tid.ad.seminar.ms.services.BorrowingService {
+......
+@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+public void assignBook(Book book, User user) {
+......
+}
+.......
+}
+}}}
 = Helpers =
 == Importar ficheros de propiedades ==
 Normalmente algunas de las propiedades que se asignen a los beans declarados en un application context, tomarán su valor de los ficheros de propiedades de la aplicación. La forma de cargarlos es:
@@ -166,7 +256,8 @@ La forma de definirlos es:
 	</property>
 </bean>
 }}}
-Y la de recuperar un mensaje:
+Al inicializarse el contexto, Spring cargará todos los ficheros de recursos de forma global. Por este motivo, al recuperar los mensajes no es necesario indicar los ficheros:
+
 {{{
 applicationContext
 	    .getMessage("empty.avatar.uuid", params, Locale.getDefault())
