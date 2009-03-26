@@ -168,4 +168,6 @@ La forma de definirlos es:
 }}}
 Y la de recuperar un mensaje:
 {{{
+applicationContext
+	    .getMessage("empty.avatar.uuid", params, Locale.getDefault())
 }}}
