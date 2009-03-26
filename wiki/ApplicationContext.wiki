@@ -131,6 +131,41 @@ public class UserDaoTest {
 En cualquiera de los dos casos, "la inyección" se realiza através del método setter de la propiedad, por lo que es obligatorio crearlo.
 
 = Helpers =
+== Importar ficheros de propiedades ==
+Normalmente algunas de las propiedades que se asignen a los beans declarados en un application context, tomarán su valor de los ficheros de propiedades de la aplicación. La forma de cargarlos es:
+{{{
+<!-- Use the property configurer for assigning configuration variables -->
+<bean id="propertyConfigurer"
+	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="locations" value="classpath*:main.properties"/>
+</bean>
+}}}
+Y la forma de acceder a las propiedades es:
+{{{
+<!-- Database Connection Parameters -->
 
- * Importar ficheros de propiedades
- * Acceder a recursos de mensajes
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+</bean>
+}}}
+== Acceder a recursos de mensajes ==
+Spring permite definir ficheros de mensajes. Estos recursos de mensajes podrán ser multiidioma, que se podrá elegir dependiendo del idioma del servidor, de la request, etc.
+La forma de definirlos es:
+{{{
+<!-- Configure the message source for info messages and errors -->
+<bean id="messageSource"
+	class="org.springframework.context.support.ResourceBundleMessageSource">
+	<property name="basenames">
+		<list>
+			<value>services</value>
+			<value>validators</value>
+		</list>
+	</property>
+</bean>
+}}}
+Y la de recuperar un mensaje:
+{{{
+}}}
