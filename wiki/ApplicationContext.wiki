@@ -132,7 +132,8 @@ En cualquiera de los dos casos, "la inyección" se realiza através del método 
 
 = Aspect Oriented Programming =
 
-Existen dos formas de abordar AOP, una es incluir toda la configuración en el applicationContext:
+Existen dos formas de abordar AOP:
+ * Una es incluir toda la configuración en el applicationContext:
 {{{
 ....
 <!-- Database transaction manager -->
@@ -183,7 +184,7 @@ Existen dos formas de abordar AOP, una es incluir toda la configuración en el a
 </beans>
 }}}
 
-Y la otra es sólo definir el aspecto y cómo tratarlo, pero configurarlo en las clases correspondiente mediante anotaciones
+ * Y la otra es definir el aspecto y cómo tratarlo en el applicationContext, pero configurarlo en cada una clases correspondientes, mediante anotaciones
 {{{
 <?xml version="1.0" encoding="UTF-8"?>
 <beans 
