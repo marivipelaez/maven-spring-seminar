@@ -6,9 +6,8 @@
 Este módulo contiene el acceso a datos utilizando:
  * Como base de datos !MySql
  * Configurando los DAOs (Data Access Object) a través de Spring-JDBC
- * En el paquete de test se ha implementado:
-  * !UserDaoTest: se inicia la conexión al levantar el contexto de Spring. Exige que la DB exista y contenga los datos adecuados.
-  * !BookDaoTest: se inicia la conexión con DBUnit. Sólo tiene que existir el schema, los datos se recogerán de un fichero de configuración (dbUnitFile.xml)
+ * En el paquete de test se han implementado:
+  * !UserDaoTest y !BookDaoTest: se inicia la conexión al levantar el contexto de Spring. Exige que la DB exista y contenga los datos adecuados.
 
 {{{
  - es.tid.ad.seminar.ms.dbaccess
