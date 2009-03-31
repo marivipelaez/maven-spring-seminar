@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Implementación del módulo de persistencia de datos
 #sidebar TOC
 <wiki:toc max_depth="4" />
 
