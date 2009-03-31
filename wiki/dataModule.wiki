@@ -1,4 +1,4 @@
-#summary Implementación del módulo de persistencia de datos
+#summary Paquete con todos los beans definidos en la aplicación
 #sidebar TOC
 <wiki:toc max_depth="4" />
 
