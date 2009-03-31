@@ -222,6 +222,77 @@ public void assignBook(Book book, User user) {
 .......
 }
 }}}
+
+Otro de los ejemplos clásicos en AOP es el control de los logs de entrada y salida de cada método de un proyecto. 
+
+Inicialmente se configura en el applicationContext correspondiente el aspecto correspondiente y se indica que se van a utilizar anotaciones para su gestión:
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd" 
+	default-autowire="byName">
+
+.....
+
+<aop:aspectj-autoproxy />
+<bean id="loggingInterceptor" class="es.tid.ad.seminar.ms.dbaccess.aspects.LoggerInterceptor" />
+
+.....
+</beans>
+}}}
+
+Después se crearán las clases de pointcut, es decir, las que configuran dónde se introducirán los interceptores, en el ejemplo, en cualquier método que se ejecute dentro del paquete de daos y de sus subpaquetes:
+{{{
+....
+public class LoggerPointcut {
+    @Pointcut("within(es.tid.ad.seminar.ms.dbaccess.daos..*)")
+    public void start() {
+	
+    }
+.....
+}
+}}}
+
+Por último, se crearán las clases que implementarán el interceptor, es decir, qué es lo que hay que hacer cuando se entre a uno de los métodos de los daos. En este caso, se ha configurado un interceptor (@Aspect) que antes (@Before) de que se entre a uno de los métodos definidos en el pointcut indicado, escribirá el log indicado, sólo si el debug está habilitado:
+
+{{{
+....
+@Aspect
+public class LoggerAspect {
+    final static Log LOG = LogFactory.getLog(LoggerAspect.class);
+
+    @Before ("es.tid.ad.seminar.ms.dbaccess.daos.pointcuts.LoggerPointcut.start()")
+    public void doPreviousLog(JoinPoint jp) {
+	if(LOG.isDebugEnabled()) {
+	    final String methodName = jp.getSignature().getName();
+	    final String className = jp.getTarget().getClass().getName();
+	    final List<Object> params = new ArrayList<Object>();
+	    params.add(className);
+	    params.add(methodName);
+	    final String message = "Entrando a {0}.{1} con parámetros ";
+	    StringBuilder sb = new StringBuilder(message);
+	    int c = params.size();
+	    for(Object o : jp.getArgs()) {
+		sb.append("{").append(c).append("} ");
+		params.add(o);
+		c++;
+	    }
+	    LOG.debug(format(sb.toString(), params.toArray()));
+	}
+    }
+}
+....
+}}}
+
+
+Del mismo modo, se pueden implementar interceptores para otros sistemas transversales,como el de autenticación, el de gestión de excepciones, etc.
+
 = Helpers =
 == Importar ficheros de propiedades ==
 Normalmente algunas de las propiedades que se asignen a los beans declarados en un application context, tomarán su valor de los ficheros de propiedades de la aplicación. La forma de cargarlos es:
