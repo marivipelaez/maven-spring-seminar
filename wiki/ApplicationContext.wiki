@@ -36,7 +36,7 @@ Además de la configuración del web.xml es necesario añadir:
 {{{
 ...
 
-public class HttpGapAdapterServlet extends HttpServlet {
+public class MyServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private WebApplicationContext ctx;
 ....
@@ -46,7 +46,7 @@ public class HttpGapAdapterServlet extends HttpServlet {
         super.init();
 
         ctx = ContextLoader.getCurrentWebApplicationContext();
-        // TODO crear instancia de ACL
+        ...
     }
 ...
 }
