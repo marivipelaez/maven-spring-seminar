@@ -15,6 +15,7 @@ En el caso de una aplicación web, el contexto lo levanta el contenedor de servl
 <web-app>
 .....
 <!-- Spring framework context file -->
+<!-- Default configuration, it could be omitted -->
 <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>/WEB-INF/applicationContext.xml</param-value>
