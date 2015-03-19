@@ -1,0 +1,309 @@
+
+
+# Proyecto multimódulo #
+
+Las razones para realizar un proyecto multimódulo son:
+
+  1. El proyecto tiene parte cliente y parte servidora. Ambas partes han de compartir los datos (lectores, autores, libros, ...), y además la parte cliente debería utilizar los mismos interfaces para invocar los servicios(dar de alta lector, prestar libro, devolver libro, ...) definidos en la parte servidora.
+  1. Aislar los diferentes módulos para poderlos reutilizar en otros desarrollos.
+
+## Modificar pom.xml para aceptar multimódulos ##
+```
+<packaging>pom</packaging> #Antes <packaging>jar</packaging>
+```
+## Generación de los diferentes módulos ##
+
+```
+ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=data -Dpackage=es.tid.ad.seminar.ms.data -DinteractiveMode=false archetype:generate
+ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=dbaccess -Dpackage=es.tid.ad.seminar.ms.dbaccess -DinteractiveMode=false archetype:generate
+ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=services -Dpackage=es.tid.ad.seminar.ms.services -DinteractiveMode=false archetype:generate
+ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=web -Dpackage=es.tid.ad.seminar.ms.web -DinteractiveMode=false -DarchetypeArtifactId=maven-archetype-webapp archetype:generate
+ngsn@ironman:~/workspace/ms$ mvn -Dversion=0.0.1-SNAPSHOT -DgroupId=es.tid.ad.seminar.ms -DartifactId=client -Dpackage=es.tid.ad.seminar.ms.client -DinteractiveMode=false archetype:generate
+ngsn@ironman:~/workspace/ms$ mvn eclipse:eclipse
+```
+
+## Editar los pom.xml de cada módulo ##
+
+## Añadir a cada pom.xml ##
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+```
+
+### Borrar dependencias ###
+```
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+```
+### Eliminar las etiquetas **groupId** y **version** ###
+**Dejar las etiquetas groupId y version del proyecto padre y eliminarlas del proyecto hijo. Las versiones se crearán del proyecto no de cada uno de los módulos, por lo tanto no tiene sentido tener la etiqueta versión.
+```
+<groupId>es.tid.ad.seminar.ms</groupId>
+<version>0.0.1-SNAPSHOT</version>
+```**
+
+## Importar módulos en eclipse ##
+
+Todos los módulos generados tendrán que ser importados en Eclipse. Se pone como ejemplo la importación del módulo data
+
+### Crear nuevo proyecto data ###
+
+![http://maven-spring-seminar.googlecode.com/files/dataModule.png](http://maven-spring-seminar.googlecode.com/files/dataModule.png)
+
+### Configurar Working Set ###
+
+![http://maven-spring-seminar.googlecode.com/files/configureWorkingSet.png](http://maven-spring-seminar.googlecode.com/files/configureWorkingSet.png)
+
+#### Seleccionar  Working Set ####
+![http://maven-spring-seminar.googlecode.com/files/SelectWorkingSet%20.png](http://maven-spring-seminar.googlecode.com/files/SelectWorkingSet%20.png)
+
+#### Añadir proyecto data al Working Set ####
+![http://maven-spring-seminar.googlecode.com/files/addProjectToWorkingSet.png](http://maven-spring-seminar.googlecode.com/files/addProjectToWorkingSet.png)
+
+## Configuración **pom.xml** del proyecto padre ##
+
+### Definición de perfiles ###
+Al ser un proyecto multientorno (desarrollo, integración y producción), se ha de configurar al menos un perfil por cada entorno.
+
+```
+<profiles>
+		<!-- Profile desarrollo (Activo por defecto) -->
+		<profile>
+			<id>development</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>development</env>
+				<compilerInfoDebug>true</compilerInfoDebug>
+				<compilerOptimize>false</compilerOptimize>
+			</properties>
+		</profile>
+		<!-- Integración -->
+		<profile>
+			<id>integration</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<env>integration</env>
+				<compilerInfoDebug>true</compilerInfoDebug>
+                <compilerOptimize>false</compilerOptimize>
+			</properties>
+		</profile>
+		
+		<!-- Producción -->
+		<profile>
+			<id>production</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<env>production</env>
+				<compilerInfoDebug>false</compilerInfoDebug>
+                <compilerOptimize>true</compilerOptimize>
+			</properties>
+		</profile>
+	</profiles>
+```
+
+### Configuración de plugins comunes ###
+#### Acceso a SVN ####
+
+Para poder trabajar con SVN desde maven es necesario tener instalado un cliente de SVN por línea de comandos. Para Windows http://www.collab.net/servlets/OCNDirector?id=CSVN1.5.6WINC
+
+Para configurar el acceso al SVN es necesario definir la etiqueta con la configuración del SVN y la configuración de los plugins
+
+##### Configuración SCM #####
+```
+<scm>
+  <!-- Acceso en modo lectura para usuarios anónimos -->
+  <connection>scm:svn:http://maven-spring-seminar.googlecode.com/svn/trunk/ms</connection> 
+  <!-- Acceso en modo escritura/lectura para los usuarios dados de alta en el proyecto -->
+  <developerConnection>scm:svn:https://maven-spring-seminar.googlecode.com/svn/trunk/ms</developerConnection> 
+  <url>http://maven-spring-seminar.googlecode.com/svn/trunk/ms</url> 
+  </scm>
+```
+###### Configuración plugins de acceso al SVN ######
+
+**Plugin de acceso al SVN**
+
+Este plugin es el que se utiliza para hacer chekin, checkout, ...
+```
+ <!--  integración con SVN  --> 
+ <plugin>
+  <groupId>org.apache.maven.plugins</groupId> 
+  <artifactId>maven-scm-plugin</artifactId> 
+  <configuration>
+     <goals>install</goals> 
+     <checkoutDirectory>/home/ngsn/NGSN/dev/workspace</checkoutDirectory>  
+     <username>carlosegg</username> 
+     <password>EsteNoEsMiPassword</password> 
+    <tagBase>https://maven-spring-seminar.googlecode.com/svn/tags</tagBase> 
+  </configuration>
+ </plugin>
+```
+
+La configuración del usuario y el password se puede parametrizar en el settings.xml, o bien ejecutar el plugin
+
+`mvn scm:checkout -Dusername=carlosegg -Dpassword=EsteNoEsMiPassword`
+
+
+**Plugin para la generación de una release en el SVN**
+
+```
+ <plugin>
+   <groupId>org.apache.maven.plugins</groupId> 
+   <artifactId>maven-release-plugin</artifactId> 
+   <configuration>
+     <username>carlosegg</username> 
+     <password>EsteNoEsMiPassowrd</password> 
+     <tagBase>https://maven-spring-seminar.googlecode.com/svn/tags</tagBase> 
+   </configuration>
+ </plugin>
+
+```
+
+La configuración del usuario y el password se puede parametrizar en el settings.xml, o bien ejecutar el plugin
+
+```
+   mvn release:prepare -Dusername=carlosegg -Dpassword=EsteNoEsMiPassword
+   mvn release:perform -Dusername=carlosegg -Dpassword=EsteNoEsMiPassword
+
+```
+
+
+#### Plugin compilador (maven-compiler-plugin) ####
+El plugin del compilador no es necesario añadirlo al pom.xml a no ser que se tengan que modificar las propiedades por defecto de éste.
+
+```
+<!-- modificar las opciones del compilador -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${jvm.version}</source>
+					<target>${jvm.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<debug>${compilerInfoDebug}</debug>
+					<optimize>${compilerOptimize}</optimize>
+				</configuration>
+			</plugin>
+```
+
+#### Plugin para la identifiación del número de versión del componente(buildnumber-maven-plugin) ####
+Dentro de una versión de SNAPSHOT del componente se pretende distiguir los diferentes buils que se hacen, para ello se añade una etiqueta **buildnumber** con valor {0,date,yyyy-MM-dd} identificando el número de versión. Esta etiqueta será utilizada por el maven-jar-plugin.
+
+```
+			<plugin>
+				<!--
+				    Generación del número de versión. Es útil para distinguir dentro de una versión de SNAPSHOT 
+				    del componente ya que se añade una etiqueta con la fecha de cuando se generó la versión
+				-->
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin 
+				</artifactId>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<format>{0,date,yyyy-MM-dd}</format>
+					<items>
+						<item>timestamp</item>
+					</items>
+					<doCheck>true</doCheck>
+					<doUpdate>true</doUpdate>
+				</configuration>
+			</plugin>
+
+```
+#### Plugin para la generación del jar (maven-jar-plugin) ####
+Cada módulo generará un jar (a excepción del módulo Web) en la fase de package, si hay que cambiar las propiedades del plugin:
+
+```
+<!-- Como se ha de generar el jar del proyecto -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<!-- Por defecto siempre se arranca la aplicación con Bootstrap -->
+							<mainClass>${package}.main.Bootstrap 
+							</mainClass>
+							<packageName>${project.groupId}.${project.artifactId} </packageName>
+							<addClasspath>true</addClasspath>
+							<addExtensions />
+							<!--
+								Todos los jars de los que se dependa estarán en el directorio
+								lib
+							-->
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+						<manifestEntries>
+						    <!-- Se adelante al classpath el directorio conf/        
+						    -->
+							<Class-Path>conf/</Class-Path>
+							<Released-Date> ${buildNumber}</Released-Date>
+							<Implementation-Version> ${pom.version}</Implementation-Version>
+							<Implementation-Title> ${project.name} - ${buildNumber} 
+							</Implementation-Title>
+							<mode>${env}</mode>
+							<url>${pom.url}</url>
+							<organization>Telefónica Investigación y Desarrollo
+							</organization>
+							<Built-By>carlosg</Built-By>
+							<developer>Carlos E. Gómez Gómez</developer>
+							<developer-mail>carlosg@tid.es</developer-mail>
+						</manifestEntries>
+					</archive>
+					<excludes>
+						<!--
+							Estos dos ficheros irán el directorio conf/ de la aplicación
+							cuando se haga el assembly. El main.properties con la
+							configuración del componente se ha de agregar cuando se use el
+							componente.
+						-->
+						<exclude>log4j.xml</exclude>
+						<exclude>main.properties</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+```
+
+### Configuración de repositorios donde se hará la distribución del proyecto ###
+```
+    <distributionManagement>
+		<!-- Repositorio para hacer el deploy de las releases
+		-->
+        <repository>
+            <id>${repoMavenId}</id>
+            <name>${repoMavenName}</name>
+            <url>${repoMavenUrl}</url>
+        </repository>
+		<!-- Repositorio de snapshot de Telefónica I+D Barcelona -->
+        <snapshotRepository>
+            <id>${repoMavenSnapshotId}</id>
+            <name>${repoMavenSnapshotName}</name>
+            <url>${repoMavenSnapshotUrl}</url>
+        </snapshotRepository>
+		<!-- Máquina donde se publica el site del proyecto -->
+        <site>
+            <id>${repoSiteId}</id>
+            <name>${repoSiteName}</name>
+            <url>${repoSiteUrl}/${groupId}/${artifactId} 
+            </url>
+        </site>
+    </distributionManagement>
+```

@@ -1,0 +1,23 @@
+
+
+# Introducción #
+Este módulo contiene el acceso a datos utilizando:
+  * Como base de datos MySql
+  * Configurando los DAOs (Data Access Object) a través de Spring-JDBC
+  * En el paquete de test se han implementado:
+    * UserDaoTest y BookDaoTest: se inicia la conexión al levantar el contexto de Spring. Exige que la DB exista y contenga los datos adecuados.
+
+```
+ - es.tid.ad.seminar.ms.dbaccess
+  - es.tid.ad.seminar.ms.dbaccess.daos Contiene las interfaces de los daos
+   - es.tid.ad.seminar.ms.dbaccess.daos.impl Contiene las clases implementadas de los daos
+```
+
+# ApplicationContext #
+
+# Modelo de datos #
+
+Para generar el modelo de datos se ha utilizado MySql Workbench, porque permite configurar la DB gráficamente y generar el script de creación automáticamente.
+El diagrama entidad-relación de nuestro ejemplo es:
+
+![http://maven-spring-seminar.googlecode.com/files/modelo.png](http://maven-spring-seminar.googlecode.com/files/modelo.png)

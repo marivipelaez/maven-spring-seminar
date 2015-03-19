@@ -1,0 +1,29 @@
+
+
+# Introducción #
+Este modulo habilita el acceso a la biblioteca a través de HTTP
+
+
+
+
+## Configuración aplicación Web ##
+### Editar web.xml ###
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    version="2.5">
+    <display-name>Spring Maven Seminar</display-name>
+    <servlet>
+        <servlet-name>BiblioManager</servlet-name>
+        <servlet-class>es.tid.ad.seminar.ms.web.BiblioManager
+        </servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!-- Map all the requests to the servlet dispatcher -->
+    <servlet-mapping>
+        <servlet-name>BiblioManager</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+</web-app>
+```

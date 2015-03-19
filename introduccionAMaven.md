@@ -1,0 +1,1 @@
+El seminario comenzará con una pequeña [introducción a maven](http://pimpam.googlecode.com/svn/trunk/standalone-archetype/src/site/resources/Introducci%c3%b3n%20a%20Maven%202.ppt)

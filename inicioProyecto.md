@@ -1,0 +1,141 @@
+
+
+
+# Inicio de Proyecto #
+## Crear proyecto a partir del arquetipo básico de maven ##
+
+Situarse en el directorio workspace de eclipse.
+```
+ngsn@ironman:~/workspace$ mvn -DgroupId=es.tid.ad.seminar -DartifactId=ms -Dpackage=es.tid.ad.seminar.ms -Dversion=0.0.1-SNAPSHOT -DinteractiveMode=false archetype:generate 
+ngsn@ironman:~/workspace$ cd ms
+ngsn@ironman:~/workspace/ms$ mvn eclipse:eclipse
+```
+
+## Creación de un proyecto con eclipse ##
+
+![http://maven-spring-seminar.googlecode.com/files/createProject.png](http://maven-spring-seminar.googlecode.com/files/createProject.png)
+
+## Habilitar proyecto maven en Eclipse ##
+
+![http://maven-spring-seminar.googlecode.com/files/habilitaMavenEclipse.png](http://maven-spring-seminar.googlecode.com/files/habilitaMavenEclipse.png)
+
+
+
+
+
+## Edición pom.xml ##
+
+pom.xml inicial
+
+```
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>es.tid.ad.seminar</groupId>
+  <artifactId>ms</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>ms</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
+```
+
+### Configuración propiedades ###
+
+```
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>es.tid.ad.seminar</groupId>
+  <artifactId>ms</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>ms</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <!-- Forzamos a los plugins a utilizar UTF-8, para evitar problemas con
+         los encodings por defectos de los diferentes sistemas operativos -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <copyright.year>2009</copyright.year>
+    <jvm.version>1.6</jvm.version>
+    <junit.version>4.5</junit.version>
+    <spring.version>2.5.6</spring.version>
+  </properties>
+  <dependencies>
+
+    <!-- Dependencias de Test -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
+```
+
+
+### Adición dependencias ###
+
+La librería de trazas que se utilizará será commons-logging (scope compile), que nos aislará de del sistema de trazas que se utilice por debajo (java-logging (scope runtime), o log4j (scope runtime)). Para nuestro ejemplo las trazas sólo se mostrarán por pantalla, o se escribirán en un fichero, por lo que no hace faltan las librerías (dependencias transitivas) que utilizan tanto commons-logging como log4j.
+
+```
+        <!-- Dependencias externas -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>logkit</groupId>
+					<artifactId>logkit</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>avalon-framework</groupId>
+					<artifactId>avalon-framework</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.jms</groupId>
+					<artifactId>jms</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.activation</groupId>
+					<artifactId>activation</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+```

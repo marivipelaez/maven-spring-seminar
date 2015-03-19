@@ -1,0 +1,119 @@
+
+
+# Introducción #
+_Para esta miniguía de test unitarios, se van a utilizar los tests implementados en el proyecto de acceso a datos._
+
+Si seguimos las normas de TDD (Test Driven Development) antes de empezar a implementar las interfaces, se debe crear la clase de test, por supuesto, fallará!! Y este será nuestro procedimiento habitual. Las clases de test se crearán en el mismo package que las interfaces más test:
+```
+es.tid.ad.seminar.ms.daos.test
+```
+
+Normalmente se implementará al menos una clase de test por clase implementada. Definiéndose un test correcto y uno con error, por lo menos, para cada método. Aunque deberían existir:
+  * Un test con parámetros de entrada correctos y resultado correcto.
+  * Un test con parámetros de entrada correctos, pero con resultado incorrecto.
+  * Un test con parámetros de entrada no válidos
+  * ...
+Es decir, uno para cada posible flujo de código.
+
+Las clases de test incluirán el contexto de Spring y necesitarán que se inyecten las dependencias de los Daos que se vayan a llamar:
+```
+@Autowired(required = true)
+protected BookDao bookDao;
+```
+
+**Cada propiedad inyectada por autowire**, deberá disponer de, al menos, el método setter correspondiente.
+
+Para probar los Daos se pueden seguir dos filosofías, por lo menos:
+  1. Utilizar dbUnit (que para esto está): permite mantener los datos de test en un fichero xml, construir y rellenar una instancia de db y dispone de métodos y clases específicas para testar accesos a ddbb.
+```
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration (locations={"classpath*:**testContext.xml"})
+public class BookDaoTest {
+    @Autowired(required = true)
+    protected DataSource dataSource;
+    @Autowired(required = true) 
+    protected String dbUnitFile = "dbUnitTest.xml"; 
+
+}
+```
+
+Esta clase debe implementar el método :
+```
+ @Before
+ public void onSetUpInTransaction() throws Exception {
+        logger.info("Cargando fichero XML de carga para DBUnit " + dbUnitFile);
+        InputStream file = this.getClass().getClassLoader().getResourceAsStream(dbUnitFile);
+        if (file == null) {
+            fail(format("El fichero {0} no se ha localizado en el classpath", dbUnitFile));
+        }
+        IDataSet dataSet = new FlatXmlDataSet(file);
+        // Creamos la conexión con la base de datos donde cargar la info
+        logger.info("Conectando con la base de datos de testing"); 
+        IDatabaseConnection connection = new DatabaseConnection(db.getConnection());
+        DatabaseConfig config = connection.getConfig();
+        config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MysqlDataTypeFactory());
+        try {
+            logger.info("Cargando datos de prueba DBUnit en la base de datos"); 
+            // Se realiza la limpieza y volcado del XML en la DB.
+            DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
+        }
+        finally {
+            connection.close();
+        }
+    }
+```
+
+> Ejemplo de fichero de configuración dbUnit:
+
+```
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <users userid="1" name="name1" />
+  <users userid="2" name="name2" />
+  <users userid="3" name="name3" />
+  <users userid="4" name="name4" />
+  
+  <books bookid="1" title="title1" author="Charles Darwin" thema="Evolution"/>
+  <books bookid="2" title="title2" author="Charles Darwin" thema="Evolution"/>
+  <books bookid="3" title="title3" author="Charles Darwin" thema="Evolution"/>
+  <books bookid="4" title="title4" author="Charles Darwin" thema="Evolution"/>
+  
+  <readers />
+ </dataset>
+```
+  1. Cargando iniciando una conexión JDBC e implementando los rollbacks adecuados por estar realizando tests. La db debe estar creada y rellena con los datos adecuados para realizar el test.
+```
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration (locations={"classpath*:**testContext.xml"})
+public class UserDaoTest {
+
+
+}
+```
+
+En cualquier caso el control de la transaccionalidad de los métodos, será inyectado por Spring.
+
+  * Ejemplo de test con una transacción de sólo lectura
+```
+ @Test
+ @Transactional (readOnly = true) 
+ public void getExistingUserByPK() {
+        Integer userId = 1;
+	User user = userDao.findByPK(userId);
+        notNull(user);
+ }
+```
+
+  * Ejemplo de test con una transacción de escritura
+```
+ @Test
+ @Transactional (propagation = Propagation.REQUIRED)
+ public void addNonExistingUser() {
+        User user = new User();
+        user.setName("pepito");
+	userDao.save();
+        user = userDao.findByName("pepito");
+        notNull(user);
+        notNull(user.getUserId());
+ }
+```

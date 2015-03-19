@@ -1,0 +1,14 @@
+
+# Entorno de desarrollo #
+## JDK1.6.0 ##
+
+## Maven 2.1.0 ##
+> Si estás dentro de la intranet de TID seguir este [manual de instalación](http://reposbcn.hi.inet/maven/site/es.tid.cd.archetypes/standalone-archetype/maven-configuration.html), sino seguir este [otro](http://code.google.com/p/pimpam/wiki/MavenConfiguration)
+
+## Tomcat 6.0.18 ##
+> Descargarse tomcat y configurarlo tal y como se describe [aquí](http://reposbcn/maven/site/es.tid.cd.archetypes/cxf-archetype/tomcat-configuration.html)
+
+## Eclipse Ganymede ##
+> Seguir el manual de instalación de eclipse definido en http://pimpam.googlecode.com/files/installEclipse.pdf. Además instalar el plugin de Spring IDE
+
+> Aunque se ha seleccionado Eclipse Ganymede como entorno de desarrollo en http://pimpam.googlecode.com/files/installNetbeans.pdf están las capturas de pantalla de la instalación de Netbeans con el plugin de Maven y su posterior configuración.

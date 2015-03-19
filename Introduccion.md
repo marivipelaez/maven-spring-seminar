@@ -1,0 +1,31 @@
+
+
+# Introducción #
+
+Este seminario pretende ser una breve introducción práctica al uso de [Spring](http://www.springsource.org) y [Maven](http://maven.apache.org). Para ello se desarrollará un pequeño proyecto (gestión de una biblioteca) donde se apliquen estas dos tecnologías, teniendo en cuenta de que el tipo de proyecto es multientorno (desarrollo, integración y producción) y multimódulo (módulo de acceso a datos, módulo de servicios, modulo web de acceso a los servicios y cliente standalone de acceso a los servicios).
+
+El desarrollo de este proyecto seguirán las siguientes [Normas de desarrollo](http://reposbcn.hi.inet/maven/site/es.tid.cd.archetypes/standalone-archetype/developerGuide.html).
+
+## Maven ##
+
+El seminario comenzará con una pequeña [introducción a maven](http://pimpam.googlecode.com/svn/trunk/standalone-archetype/src/site/resources/Introducci%c3%b3n%20a%20Maven%202.ppt)
+
+## Spring ##
+Y una definición de SpringFramework: framework de código abierto para desarrollo de aplicaciones para la plataforma Java.
+
+http://es.wikipedia.org/wiki/Spring_Framework
+
+### Conceptos básicos ###
+
+  * Inyección de dependencias (IoC, Inversion of Control):
+"La inyección de dependencias radica en resolver las dependecias de cada clase (atributos) generando los objetos cuando se arranca la aplicación y luego inyectarlos en los demás objetos que los necesiten a través de métodos set o bien a través del constructor, pero estos objetos se instancian una vez, se guardan en una factoría y se comparten por todos los usuarios (al menos en el caso de Spring) y nos evitamos tener que andar extendiendo clases o tumbar el servidor de la BD.
+
+Spring soporta inyección de dependencias a través del constructor y a través de métodos set pero se aconseja hacerlo a través de métodos set. Vamos a ver que habría que hacer para utilizar inyección de dependencias con Spring a través de métodos set."
+
+http://www.programania.net/diseno-de-software/inyeccion-de-dependencias-con-spring/
+
+  * Programación orientada a aspectos (AOP)
+"La Programación Orientada a Aspectos (AOP) es un paradigma de programación relativamente reciente cuya intención es permitir una adecuada modularización de las aplicaciones y posibilitar una mejor separación de conceptos. Gracias a la AOP se pueden encapsular los diferentes conceptos que componen una aplicación en entidades bien definidas, eliminando las dependencias entre cada uno de los módulos. De esta forma se consigue razonar mejor sobre los conceptos, se elimina la dispersión del código y las implementaciones resultan más comprensibles, adaptables y reusables. Varias tecnologías con nombres diferentes se encaminan a la consecución de los mismos objetivos y así, el término AOP es usado para referirse a varias tecnologías relacionadas como los métodos adaptivos, los filtros de composición, la programación orientada a sujetos o la separación multidimensional de competencias."
+    * Aspect (Aspecto) "es la funcionalidad que se cruza a lo largo de la aplicación (cross-cutting) que se va a implementar de forma modular y separada del resto del sistema. El ejemplo más común y simple de un aspecto es el logging (registro de sucesos) dentro del sistema, ya que necesariamente afecta a todas las partes del sistema que generan un suceso." Otros ejemplos: transactionalidad en el acceso a ddbb, gestión de excepciones, ...
+
+http://es.wikipedia.org/wiki/Programaci%C3%B3n_Orientada_a_Aspectos

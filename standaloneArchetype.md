@@ -1,0 +1,4 @@
+
+
+
+> Para el desarrollo del seminario se ha ido configurando maven paso a paso, se puede partir ya de un arquetipo con todos los plugins configurados. Este arquetipo está disponible en http://reposbcn.hi.inet/maven/site/es.tid.cd.archetypes/standalone-archetype
